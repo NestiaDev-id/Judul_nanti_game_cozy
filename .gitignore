@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# --- Godot Game Engine ---
+# Abaikan folder build & export (Desktop & Web)
+godot/builds/
+godot/exports/
+
+# Abaikan file preset jika mengandung password keystore/server
+godot/export_presets.cfg
+
+# Abaikan file binary besar hasil kompilasi
+*.pck
+*.wasm

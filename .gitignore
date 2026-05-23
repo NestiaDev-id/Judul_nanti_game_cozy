@@ -34,3 +34,8 @@ godot/export_presets.cfg
 # Abaikan file binary besar hasil kompilasi
 *.pck
 *.wasm
+
+# Abaikan folder aset mentah game (Pemisahan komponen kode vs media)
+godot/asset/
+# godot/audio/  
+# godot/models/ 

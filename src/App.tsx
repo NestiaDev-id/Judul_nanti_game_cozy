@@ -273,9 +273,40 @@ class CozyAudioEngine {
 const audio = new CozyAudioEngine();
 
 export default function App() {
-  // Screens: 'home' | 'settings' | 'gallery' | 'saves'
-  const [activeScreen, setActiveScreen] = useState<"home" | "settings" | "gallery" | "saves">("home");
+  // Screens: 'splash' | 'home' | 'settings' | 'gallery' | 'saves'
+  const [activeScreen, setActiveScreen] = useState<"splash" | "home" | "settings" | "gallery" | "saves">("splash");
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
+  
+  // Splash Loading States
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingText, setLoadingText] = useState("Inisialisasi sistem engine...");
+
+  useEffect(() => {
+    if (activeScreen !== "splash") return;
+    
+    let progress = 0;
+    const interval = setInterval(() => {
+      // Simulate random loading jumps
+      progress += Math.random() * 15;
+      if (progress > 100) progress = 100;
+      setLoadingProgress(progress);
+
+      if (progress < 30) setLoadingText("Memuat tekstur dunia & model 3D...");
+      else if (progress < 60) setLoadingText("Menghubungkan Bridge Tauri -> Godot...");
+      else if (progress < 90) setLoadingText("Mempersiapkan efek suara Lofi & Ambient...");
+      else setLoadingText("Aset berhasil dimuat!");
+
+      if (progress === 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          setActiveScreen("home");
+          audio.playSfx("click"); // Play a soft chime when ready
+        }, 800);
+      }
+    }, 250);
+
+    return () => clearInterval(interval);
+  }, [activeScreen]);
   
   // States
   const [isConnecting, setIsConnecting] = useState(false);
@@ -368,7 +399,45 @@ export default function App() {
   };
 
   return (
-    <main className="w-screen h-screen relative overflow-hidden font-sans text-white select-none">
+    <main className="w-screen h-screen relative overflow-hidden font-sans text-white select-none bg-[#07080c]">
+
+      {/* ====== LAYER 0: SPLASH / LOADING SCREEN ====== */}
+      <AnimatePresence>
+        {activeScreen === "splash" && (
+          <motion.div 
+            key="splash-screen"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#07080c]"
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center w-full max-w-sm"
+            >
+              <h1 className="text-4xl font-extralight tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-cyan-200 drop-shadow-lg mb-10">
+                COZY WORLD
+              </h1>
+              
+              <div className="w-full h-0.5 bg-white/5 rounded-full overflow-hidden mb-4 relative">
+                <motion.div 
+                  className="absolute top-0 left-0 h-full bg-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.8)]"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${loadingProgress}%` }}
+                  transition={{ ease: "easeOut", duration: 0.2 }}
+                />
+              </div>
+              
+              <div className="flex justify-between w-full text-[9px] font-mono tracking-[0.2em] text-slate-500 uppercase">
+                <span className="truncate pr-4">{loadingText}</span>
+                <span>{Math.floor(loadingProgress)}%</span>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ====== LAYER 1: FULLSCREEN BACKGROUND IMAGE ====== */}
       <div className="absolute inset-0 z-0">

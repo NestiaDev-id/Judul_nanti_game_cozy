@@ -368,43 +368,51 @@ export default function App() {
   };
 
   return (
-    <main className="w-screen h-screen flex bg-[#07080c] overflow-hidden relative font-sans text-white select-none">
-      
-      {/* Dynamic Ambient Background Orbs */}
-      <div className="absolute top-[-15%] left-[-10%] w-[50%] h-[50%] bg-cyan-600/10 rounded-full blur-[140px] animate-pulse-slow"></div>
-      <div className="absolute bottom-[-15%] right-[-10%] w-[50%] h-[50%] bg-amber-500/5 rounded-full blur-[140px]"></div>
-      <div className="absolute top-[40%] left-[30%] w-[30%] h-[30%] bg-purple-500/5 rounded-full blur-[120px]"></div>
+    <main className="w-screen h-screen relative overflow-hidden font-sans text-white select-none">
 
-      {/* Decorative Grid Lines overlay (Premium details) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+      {/* ====== LAYER 1: FULLSCREEN BACKGROUND IMAGE ====== */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/cozy_cabin.png"
+          alt="Cozy World Background"
+          className="w-full h-full object-cover"
+        />
+        {/* Warm cinematic color grading overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-black/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+      </div>
 
-      {/* LEFT COLUMN: MAIN MENU PANELS (Aligned Left) */}
-      <div className="w-[34%] min-w-[400px] h-full flex flex-col justify-between py-14 pl-14 pr-8 relative z-20 glass-panel border-r border-white/5">
-        
-        {/* TOP: Title & Header Area */}
-        <div className="flex flex-col gap-2">
-          {/* Logo Badge */}
+      {/* ====== LAYER 2: TITLE + MENU OPTIONS (Floating on top of BG) ====== */}
+      <div className="absolute inset-0 z-10 flex flex-col justify-between py-14 px-14 pointer-events-none">
+
+        {/* TOP-LEFT: Game Title */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col gap-1.5 pointer-events-auto"
+        >
           <div className="flex items-center gap-2 mb-1">
             <span className="h-2 w-2 rounded-full bg-amber-400 animate-ping"></span>
-            <span className="text-[10px] tracking-[0.3em] font-medium text-amber-500/90 uppercase">
-              Now Launching: Alpha 0.4
+            <span className="text-[10px] tracking-[0.3em] font-medium text-amber-400/90 uppercase">
+              Alpha 0.4
             </span>
           </div>
-          
-          <h1 className="text-4xl font-extralight tracking-[0.22em] text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-cyan-200 drop-shadow-lg">
+
+          <h1 className="text-5xl font-extralight tracking-[0.22em] text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-cyan-200 drop-shadow-lg">
             COZY WORLD
           </h1>
-          <p className="text-[11px] tracking-[0.45em] text-cyan-400/50 uppercase font-light">
+          <p className="text-[11px] tracking-[0.45em] text-cyan-300/50 uppercase font-light">
             Eksplorasi & Relaksasi
           </p>
-          <div className="w-24 h-[1px] bg-gradient-to-r from-cyan-500/40 to-transparent mt-3"></div>
-        </div>
+          <div className="w-24 h-[1px] bg-gradient-to-r from-cyan-400/50 to-transparent mt-2"></div>
+        </motion.div>
 
-        {/* CENTER: Main Interactive Screen Controller */}
-        <div className="flex-1 my-10 flex flex-col justify-center">
+        {/* LEFT-CENTER: Menu Options (directly below title area) */}
+        <div className="flex-1 flex flex-col justify-center max-w-md pointer-events-auto">
           <AnimatePresence mode="wait">
-            
-            {/* Screen 1: MAIN MENU HOME */}
+
+            {/* ── HOME MENU ── */}
             {activeScreen === "home" && (
               <motion.div
                 key="home-menu"
@@ -412,111 +420,91 @@ export default function App() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className="flex flex-col gap-4 w-full"
+                className="flex flex-col gap-3"
               >
-                {/* 1. Mulai Petualangan */}
+                {/* Mulai Petualangan */}
                 <button
                   onClick={launchGame}
                   onMouseEnter={() => handleHover("mulai")}
                   onMouseLeave={() => handleHover(null)}
-                  className="group relative w-full flex items-center justify-between py-4 px-5 rounded-xl border border-cyan-500/10 hover:border-cyan-400/40 bg-white/[0.01] hover:bg-cyan-950/10 transition-all duration-300 overflow-hidden cursor-pointer"
+                  className="group relative flex items-center gap-4 py-3 px-5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-cyan-400/40 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-transparent -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                  <div className="flex items-center gap-4 relative z-10">
-                    <Sparkles className="w-5 h-5 text-cyan-400/70 group-hover:text-cyan-300 transition-colors" />
-                    <span className="text-sm font-light tracking-[0.25em] uppercase text-slate-300 group-hover:text-white transition-colors">
-                      Mulai Petualangan
-                    </span>
-                  </div>
-                  <div className="h-1.5 w-1.5 rounded-full bg-cyan-400/40 group-hover:bg-cyan-400 group-hover:scale-125 transition-all"></div>
+                  <Sparkles className="w-5 h-5 text-cyan-400/70 group-hover:text-cyan-300 transition-colors" />
+                  <span className="text-sm font-light tracking-[0.2em] uppercase text-slate-200 group-hover:text-white transition-colors">
+                    Mulai Petualangan
+                  </span>
                 </button>
 
-                {/* 2. Lanjutkan Perjalanan */}
+                {/* Lanjutkan Game */}
                 <button
                   onClick={() => handleScreenChange("saves")}
                   onMouseEnter={() => handleHover("lanjut")}
                   onMouseLeave={() => handleHover(null)}
-                  className="group relative w-full flex items-center justify-between py-4 px-5 rounded-xl border border-white/5 hover:border-amber-500/30 bg-white/[0.01] hover:bg-amber-950/10 transition-all duration-300 overflow-hidden cursor-pointer"
+                  className="group relative flex items-center gap-4 py-3 px-5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-amber-400/30 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                  <div className="flex items-center gap-4 relative z-10">
-                    <History className="w-5 h-5 text-amber-500/60 group-hover:text-amber-400 transition-colors" />
-                    <span className="text-sm font-light tracking-[0.25em] uppercase text-slate-400 group-hover:text-amber-100 transition-colors">
-                      Lanjutkan Game
-                    </span>
-                  </div>
-                  <div className="h-1.5 w-1.5 rounded-full bg-white/10 group-hover:bg-amber-400 transition-all"></div>
+                  <History className="w-5 h-5 text-amber-500/60 group-hover:text-amber-400 transition-colors" />
+                  <span className="text-sm font-light tracking-[0.2em] uppercase text-slate-300 group-hover:text-amber-100 transition-colors">
+                    Lanjutkan Game
+                  </span>
                 </button>
 
-                {/* 3. Galeri Dunia */}
+                {/* Galeri Dunia */}
                 <button
                   onClick={() => handleScreenChange("gallery")}
                   onMouseEnter={() => handleHover("galeri")}
                   onMouseLeave={() => handleHover(null)}
-                  className="group relative w-full flex items-center justify-between py-4 px-5 rounded-xl border border-white/5 hover:border-slate-400/30 bg-white/[0.01] hover:bg-slate-800/10 transition-all duration-300 overflow-hidden cursor-pointer"
+                  className="group relative flex items-center gap-4 py-3 px-5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-slate-300/20 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-slate-400/10 to-transparent -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                  <div className="flex items-center gap-4 relative z-10">
-                    <ImageIcon className="w-5 h-5 text-slate-400/70 group-hover:text-slate-300 transition-colors" />
-                    <span className="text-sm font-light tracking-[0.25em] uppercase text-slate-400 group-hover:text-white transition-colors">
-                      Galeri Dunia
-                    </span>
-                  </div>
-                  <div className="h-1.5 w-1.5 rounded-full bg-white/10 group-hover:bg-slate-300 transition-all"></div>
+                  <ImageIcon className="w-5 h-5 text-slate-400/70 group-hover:text-slate-300 transition-colors" />
+                  <span className="text-sm font-light tracking-[0.2em] uppercase text-slate-300 group-hover:text-white transition-colors">
+                    Galeri Dunia
+                  </span>
                 </button>
 
-                {/* 4. Pengaturan */}
+                {/* Pengaturan */}
                 <button
                   onClick={() => handleScreenChange("settings")}
                   onMouseEnter={() => handleHover("pengaturan")}
                   onMouseLeave={() => handleHover(null)}
-                  className="group relative w-full flex items-center justify-between py-4 px-5 rounded-xl border border-white/5 hover:border-cyan-500/25 bg-white/[0.01] hover:bg-cyan-950/10 transition-all duration-300 overflow-hidden cursor-pointer"
+                  className="group relative flex items-center gap-4 py-3 px-5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-cyan-400/25 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-transparent -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                  <div className="flex items-center gap-4 relative z-10">
-                    <SettingsIcon className="w-5 h-5 text-slate-400/70 group-hover:text-cyan-400/80 transition-colors" />
-                    <span className="text-sm font-light tracking-[0.25em] uppercase text-slate-400 group-hover:text-slate-200 transition-colors">
-                      Pengaturan
-                    </span>
-                  </div>
-                  <div className="h-1.5 w-1.5 rounded-full bg-white/10 group-hover:bg-cyan-400 transition-all"></div>
+                  <SettingsIcon className="w-5 h-5 text-slate-400/70 group-hover:text-cyan-400/80 transition-colors" />
+                  <span className="text-sm font-light tracking-[0.2em] uppercase text-slate-300 group-hover:text-slate-100 transition-colors">
+                    Pengaturan
+                  </span>
                 </button>
 
-                {/* 5. Keluar Game */}
+                {/* Keluar Game */}
                 <button
                   onMouseEnter={() => handleHover("keluar")}
                   onMouseLeave={() => handleHover(null)}
-                  className="group relative w-full flex items-center justify-between py-4 px-5 rounded-xl border border-white/5 hover:border-red-500/30 bg-white/[0.01] hover:bg-red-950/10 transition-all duration-300 overflow-hidden cursor-pointer"
+                  className="group relative flex items-center gap-4 py-3 px-5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-red-500/30 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-transparent -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                  <div className="flex items-center gap-4 relative z-10">
-                    <LogOut className="w-5 h-5 text-red-500/50 group-hover:text-red-400 transition-colors" />
-                    <span className="text-sm font-light tracking-[0.25em] uppercase text-slate-400 group-hover:text-red-300 transition-colors">
-                      Keluar Game
-                    </span>
-                  </div>
-                  <div className="h-1.5 w-1.5 rounded-full bg-white/10 group-hover:bg-red-400 transition-all"></div>
+                  <LogOut className="w-5 h-5 text-red-500/50 group-hover:text-red-400 transition-colors" />
+                  <span className="text-sm font-light tracking-[0.2em] uppercase text-slate-300 group-hover:text-red-300 transition-colors">
+                    Keluar Game
+                  </span>
                 </button>
               </motion.div>
             )}
 
-            {/* Screen 2: SAVE SLOTS */}
+            {/* ── SAVE SLOTS ── */}
             {activeScreen === "saves" && (
               <motion.div
                 key="saves-menu"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
-                className="flex flex-col gap-4 w-full"
+                className="flex flex-col gap-3"
               >
-                <button 
+                <button
                   onClick={() => handleScreenChange("home")}
-                  className="flex items-center gap-2 text-xs tracking-wider text-amber-500/80 hover:text-amber-400 transition-colors mb-2 self-start cursor-pointer"
+                  className="flex items-center gap-2 text-xs tracking-wider text-amber-400/80 hover:text-amber-300 transition-colors mb-1 self-start cursor-pointer"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" /> KEMBALI
                 </button>
-                
-                <h3 className="text-sm font-semibold tracking-widest text-slate-300 uppercase mb-1">
+
+                <h3 className="text-sm font-semibold tracking-widest text-slate-200 uppercase mb-1">
                   PILIH SLOT PETUALANGAN
                 </h3>
 
@@ -524,18 +512,18 @@ export default function App() {
                   <button
                     key={slot.id}
                     onClick={launchGame}
-                    className="w-full text-left p-3.5 rounded-xl border border-white/5 bg-white/[0.01] hover:bg-amber-500/[0.03] hover:border-amber-500/30 transition-all duration-300 flex justify-between items-center group cursor-pointer"
+                    className="w-full text-left p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:bg-amber-500/[0.06] hover:border-amber-400/30 transition-all duration-300 flex justify-between items-center group cursor-pointer"
                   >
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-medium tracking-wide text-slate-200 group-hover:text-amber-300 transition-colors">
                           {slot.name}
                         </span>
-                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 font-mono">
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400 font-mono">
                           {slot.day}
                         </span>
                       </div>
-                      <p className="text-[10px] text-slate-500 mt-1">{slot.detail}</p>
+                      <p className="text-[10px] text-slate-400 mt-1">{slot.detail}</p>
                     </div>
                     <span className="text-[10px] font-mono text-slate-400 group-hover:text-amber-400 transition-colors">
                       {slot.playtime}
@@ -545,149 +533,121 @@ export default function App() {
               </motion.div>
             )}
 
-            {/* Screen 3: GALLERY SUBMENU */}
+            {/* ── GALLERY ── */}
             {activeScreen === "gallery" && (
               <motion.div
                 key="gallery-menu"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
-                className="flex flex-col gap-4 w-full"
+                className="flex flex-col gap-3"
               >
-                <button 
+                <button
                   onClick={() => handleScreenChange("home")}
-                  className="flex items-center gap-2 text-xs tracking-wider text-cyan-400/80 hover:text-cyan-300 transition-colors mb-2 self-start cursor-pointer"
+                  className="flex items-center gap-2 text-xs tracking-wider text-cyan-400/80 hover:text-cyan-300 transition-colors mb-1 self-start cursor-pointer"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" /> KEMBALI
                 </button>
 
-                <h3 className="text-sm font-semibold tracking-widest text-slate-300 uppercase mb-1">
+                <h3 className="text-sm font-semibold tracking-widest text-slate-200 uppercase mb-1">
                   DOKUMENTASI DUNIA
                 </h3>
 
-                <div className="flex flex-col gap-3">
-                  {galleryItems.map((item, idx) => (
-                    <div 
-                      key={idx}
-                      className="p-3 rounded-xl border border-white/5 bg-white/[0.01] hover:border-white/10 transition-all flex gap-3 group"
-                    >
-                      <div className="w-14 h-14 rounded-lg bg-slate-900 border border-white/10 overflow-hidden flex-shrink-0">
-                        <img src={item.img} alt={item.title} className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500" />
-                      </div>
-                      <div>
-                        <h4 className="text-xs font-semibold text-slate-200">{item.title}</h4>
-                        <p className="text-[9px] text-cyan-400/70 font-mono tracking-wider mt-0.5">{item.region}</p>
-                        <p className="text-[10px] text-slate-400 mt-1 leading-normal line-clamp-1">{item.desc}</p>
-                      </div>
+                {galleryItems.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-white/15 transition-all flex gap-3 group"
+                  >
+                    <div className="w-14 h-14 rounded-lg bg-black/30 border border-white/10 overflow-hidden flex-shrink-0">
+                      <img src={item.img} alt={item.title} className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500" />
                     </div>
-                  ))}
-                </div>
+                    <div>
+                      <h4 className="text-xs font-semibold text-slate-200">{item.title}</h4>
+                      <p className="text-[9px] text-cyan-400/70 font-mono tracking-wider mt-0.5">{item.region}</p>
+                      <p className="text-[10px] text-slate-400 mt-1 leading-normal line-clamp-1">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </motion.div>
             )}
 
-            {/* Screen 4: SETTINGS SCREEN */}
+            {/* ── SETTINGS (overlay panel, centered) ── */}
             {activeScreen === "settings" && (
               <motion.div
                 key="settings-menu"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
-                className="flex flex-col gap-4 w-full h-[380px] overflow-y-auto pr-1"
+                className="flex flex-col gap-4 w-full max-h-[60vh] overflow-y-auto pr-1"
               >
-                <button 
+                <button
                   onClick={() => handleScreenChange("home")}
-                  className="flex items-center gap-2 text-xs tracking-wider text-cyan-400/80 hover:text-cyan-300 transition-colors mb-2 self-start cursor-pointer"
+                  className="flex items-center gap-2 text-xs tracking-wider text-cyan-400/80 hover:text-cyan-300 transition-colors mb-1 self-start cursor-pointer"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" /> KEMBALI
                 </button>
 
                 {/* Section A: Audio */}
-                <div>
-                  <div className="flex items-center gap-1.5 text-slate-400 mb-2.5">
+                <div className="bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] rounded-xl p-4">
+                  <div className="flex items-center gap-1.5 text-slate-300 mb-3">
                     <Music className="w-4 h-4 text-amber-500/70" />
                     <span className="text-[10px] font-bold tracking-widest uppercase">PENGATURAN SUARA</span>
                   </div>
-                  
+
                   <div className="flex flex-col gap-3 pl-1">
-                    {/* Master */}
                     <div className="flex flex-col gap-1">
                       <div className="flex justify-between text-[10px] font-mono text-slate-400">
                         <span>VOLUME UTAMA</span>
                         <span>{masterVol}%</span>
                       </div>
-                      <input 
-                        type="range" 
-                        min="0" 
-                        max="100" 
-                        value={masterVol} 
-                        onChange={(e) => setMasterVol(Number(e.target.value))}
-                      />
+                      <input type="range" min="0" max="100" value={masterVol} onChange={(e) => setMasterVol(Number(e.target.value))} />
                     </div>
-                    {/* BGM */}
                     <div className="flex flex-col gap-1">
                       <div className="flex justify-between text-[10px] font-mono text-slate-400">
                         <span>MUSIK LATAR (LOFI)</span>
                         <span>{bgmVol}%</span>
                       </div>
-                      <input 
-                        type="range" 
-                        min="0" 
-                        max="100" 
-                        value={bgmVol} 
-                        onChange={(e) => setBgmVol(Number(e.target.value))}
-                      />
+                      <input type="range" min="0" max="100" value={bgmVol} onChange={(e) => setBgmVol(Number(e.target.value))} />
                     </div>
-                    {/* SFX */}
                     <div className="flex flex-col gap-1">
                       <div className="flex justify-between text-[10px] font-mono text-slate-400">
                         <span>EFEK SUARA</span>
                         <span>{sfxVol}%</span>
                       </div>
-                      <input 
-                        type="range" 
-                        min="0" 
-                        max="100" 
-                        value={sfxVol} 
-                        onChange={(e) => setSfxVol(Number(e.target.value))}
-                      />
+                      <input type="range" min="0" max="100" value={sfxVol} onChange={(e) => setSfxVol(Number(e.target.value))} />
                     </div>
                   </div>
                 </div>
 
-                <div className="h-[1px] bg-white/5 my-1"></div>
-
                 {/* Section B: Display/Graphics */}
-                <div>
-                  <div className="flex items-center gap-1.5 text-slate-400 mb-3">
+                <div className="bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] rounded-xl p-4">
+                  <div className="flex items-center gap-1.5 text-slate-300 mb-3">
                     <Tv className="w-4 h-4 text-cyan-400/70" />
                     <span className="text-[10px] font-bold tracking-widest uppercase">GRAFIS & TAMPILAN</span>
                   </div>
-                  
+
                   <div className="flex flex-col gap-2.5 pl-1">
-                    {/* Fullscreen Toggle */}
                     <div className="flex justify-between items-center">
                       <span className="text-[11px] text-slate-300 font-light">LAYAR PENUH</span>
-                      <button 
+                      <button
                         onClick={() => { audio.playSfx("click"); setIsFullscreen(!isFullscreen); }}
                         className={`w-9 h-5 rounded-full p-0.5 transition-colors duration-300 flex items-center ${isFullscreen ? 'bg-cyan-500' : 'bg-slate-800'}`}
                       >
                         <div className={`w-4 h-4 rounded-full bg-white transition-transform duration-300 ${isFullscreen ? 'translate-x-4' : 'translate-x-0'}`} />
                       </button>
                     </div>
-                    {/* VSync Toggle */}
                     <div className="flex justify-between items-center">
                       <span className="text-[11px] text-slate-300 font-light">V-SYNC</span>
-                      <button 
+                      <button
                         onClick={() => { audio.playSfx("click"); setVsync(!vsync); }}
                         className={`w-9 h-5 rounded-full p-0.5 transition-colors duration-300 flex items-center ${vsync ? 'bg-cyan-500' : 'bg-slate-800'}`}
                       >
                         <div className={`w-4 h-4 rounded-full bg-white transition-transform duration-300 ${vsync ? 'translate-x-4' : 'translate-x-0'}`} />
                       </button>
                     </div>
-                    {/* Quality selector */}
                     <div className="flex justify-between items-center">
                       <span className="text-[11px] text-slate-300 font-light">KUALITAS GRAFIS</span>
-                      <div className="flex gap-1.5 bg-slate-900 border border-white/5 p-0.5 rounded-lg">
+                      <div className="flex gap-1.5 bg-black/30 border border-white/5 p-0.5 rounded-lg">
                         {["Sedang", "Tinggi"].map((q) => (
                           <button
                             key={q}
@@ -702,15 +662,13 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="h-[1px] bg-white/5 my-1"></div>
-
                 {/* Section C: Controls Helper */}
-                <div>
-                  <div className="flex items-center gap-1.5 text-slate-400 mb-2">
+                <div className="bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] rounded-xl p-4">
+                  <div className="flex items-center gap-1.5 text-slate-300 mb-2">
                     <Gamepad2 className="w-4 h-4 text-cyan-400/50" />
                     <span className="text-[10px] font-bold tracking-widest uppercase">KONTROL PERMAINAN</span>
                   </div>
-                  <div className="grid grid-cols-2 gap-1.5 text-[9px] font-mono text-slate-400 bg-white/[0.01] p-2.5 rounded-lg border border-white/5">
+                  <div className="grid grid-cols-2 gap-1.5 text-[9px] font-mono text-slate-400 bg-black/20 p-2.5 rounded-lg border border-white/5">
                     <div>W, A, S, D : Gerak Karakter</div>
                     <div>E / Klik : Interaksi</div>
                     <div>Tab / I : Inventaris</div>
@@ -719,182 +677,85 @@ export default function App() {
                 </div>
               </motion.div>
             )}
+
           </AnimatePresence>
         </div>
 
-        {/* BOTTOM: System Status & Decorative Info */}
-        <div className="flex flex-col gap-4 mt-auto">
-          {/* Decorative Divider */}
-          <div className="h-[1px] bg-gradient-to-r from-white/5 via-white/10 to-transparent w-full"></div>
+        {/* BOTTOM: Footer bar */}
+        <div className="flex items-end justify-between pointer-events-auto">
 
-          {/* User/System Card */}
-          <div className="flex items-center justify-between text-[8px] font-mono tracking-widest text-slate-500 uppercase">
-            <span>Tauri Engine: 2.1.2</span>
-            <span>Port 9001 Aktif</span>
-          </div>
-
-          <div className="text-[7px] text-slate-600 font-mono uppercase text-center mt-1">
-            Didesain oleh Nestia Dev &copy; 2026
-          </div>
-        </div>
-
-      </div>
-
-      {/* RIGHT COLUMN: WORLD PREVIEW, DYNAMIC DESC & PLAYER WIDGET */}
-      <div className="flex-1 h-full relative flex items-center justify-center p-14 z-10">
-        
-        {/* Main Cozy Cabin Canvas Frame */}
-        <div className="w-full max-w-4xl aspect-[16/10] glass-panel rounded-3xl p-6 relative flex flex-col justify-between overflow-hidden shadow-2xl border border-white/10">
-          
-          {/* Framed Background Image (Stunning preview generated previously) */}
-          <div className="absolute inset-0 z-0">
-            <img 
-              src="/cozy_cabin.png" 
-              alt="Latar Hutan Musim Gugur" 
-              className="w-full h-full object-cover brightness-[0.4] contrast-[1.05] transition-transform duration-1000 scale-[1.02] group-hover:scale-105"
-            />
-            {/* Smooth warm color grading gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#07080c] via-transparent to-black/40"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#07080c]/60 via-transparent to-transparent"></div>
-          </div>
-
-          {/* TOP RIGHT WIDGETS: Ambient Details */}
-          <div className="relative z-10 flex justify-between items-start w-full">
-            {/* Dynamic Status / Location Tag */}
-            <div className="flex flex-col gap-1 bg-black/40 backdrop-blur-md border border-white/5 py-2 px-4 rounded-xl">
-              <span className="text-[8px] tracking-[0.25em] font-bold text-amber-500 uppercase">LOKASI SEKARANG</span>
-              <span className="text-[11px] font-light tracking-[0.05em] text-slate-100 flex items-center gap-1.5">
-                <Compass className="w-3.5 h-3.5 text-cyan-400" /> Kabin Hutan Musim Gugur
+          {/* Music Player Widget */}
+          <div className="flex items-center gap-3 bg-black/40 backdrop-blur-md border border-white/[0.08] py-2.5 px-4 rounded-xl">
+            <button
+              onClick={handleToggleLofi}
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer ${isPlayingLofi ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20' : 'bg-white/10 text-white hover:bg-white/20'}`}
+            >
+              {isPlayingLofi ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+            </button>
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[8px] font-bold tracking-widest text-slate-400 uppercase">MUSIK LATAR</span>
+              <span className="text-[10px] font-light text-slate-200 truncate max-w-[160px]">
+                {isPlayingLofi ? "Autumn Rain Campfire // Lofi" : "Musik Senyap"}
               </span>
-            </div>
-
-            {/* Weather / Time HUD widget */}
-            <div className="flex gap-4 bg-black/40 backdrop-blur-md border border-white/5 py-2 px-4 rounded-xl font-mono text-[9px] text-slate-300">
-              <div className="flex flex-col">
-                <span className="text-[8px] text-slate-500 uppercase">CUACA</span>
-                <span className="text-cyan-400 font-semibold tracking-wider">HUJAN RINGAN</span>
-              </div>
-              <div className="w-[1px] bg-white/10 self-stretch"></div>
-              <div className="flex flex-col">
-                <span className="text-[8px] text-slate-500 uppercase">WAKTU</span>
-                <span className="text-amber-400 font-bold">19:42 MALAM</span>
-              </div>
-            </div>
-          </div>
-
-          {/* CENTER WIDGET: Dynamic Option Descriptions (WOW factor) */}
-          <div className="relative z-10 my-auto max-w-xl text-left bg-black/25 backdrop-blur-sm p-6 rounded-2xl border border-white/5 shadow-lg">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={hoveredOption || "default"}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>
-                  <span className="text-[9px] tracking-[0.3em] font-bold text-cyan-400 uppercase">
-                    INFORMASI MENU
-                  </span>
+              {isPlayingLofi && (
+                <div className="flex gap-0.5 items-end h-2 mt-0.5">
+                  <span className="w-0.5 h-2 bg-amber-500 animate-pulse"></span>
+                  <span className="w-0.5 h-1.5 bg-amber-500 animate-pulse delay-75"></span>
+                  <span className="w-0.5 h-3 bg-amber-500 animate-pulse delay-150"></span>
+                  <span className="w-0.5 h-1 bg-amber-500 animate-pulse delay-100"></span>
                 </div>
-                <p className="text-sm font-light text-slate-200 leading-relaxed min-h-[50px]">
-                  {getDescription()}
-                </p>
-              </motion.div>
-            </AnimatePresence>
+              )}
+            </div>
           </div>
 
-          {/* BOTTOM WIDGETS: Beautiful Interactive Lofi Music Player & Launcher State */}
-          <div className="relative z-10 flex justify-between items-end w-full">
-            
-            {/* Interactive BGM Lofi Player widget */}
-            <div className="flex items-center gap-4 bg-slate-950/70 backdrop-blur-md border border-white/10 py-3 px-5 rounded-2xl max-w-xs shadow-xl">
-              <button 
-                onClick={handleToggleLofi}
-                className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${isPlayingLofi ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20' : 'bg-white/10 text-white hover:bg-white/20'} cursor-pointer`}
-              >
-                {isPlayingLofi ? <Volume2 className="w-4 h-4 animate-bounce" /> : <VolumeX className="w-4 h-4" />}
-              </button>
-              
-              <div className="flex flex-col gap-0.5">
-                <span className="text-[8px] font-bold tracking-widest text-slate-500 uppercase">MUSIK LATAR</span>
-                <span className="text-[10px] font-light text-slate-200 truncate max-w-[150px]">
-                  {isPlayingLofi ? "Autumn Rain Campfire // Lofi loop" : "Musik Latar Senyap"}
-                </span>
-                {isPlayingLofi && (
-                  <div className="flex gap-0.5 items-end h-2 mt-1">
-                    <span className="w-0.5 h-2 bg-amber-500 animate-pulse"></span>
-                    <span className="w-0.5 h-1.5 bg-amber-500 animate-pulse delay-75"></span>
-                    <span className="w-0.5 h-3 bg-amber-500 animate-pulse delay-150"></span>
-                    <span className="w-0.5 h-1 bg-amber-500 animate-pulse delay-100"></span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Standalone Status Info */}
-            <div className="text-right flex flex-col items-end gap-1.5">
-              <div className="text-[9px] font-mono text-slate-500 uppercase">
-                LAUNCHER STATUS
-              </div>
-              <div className="flex items-center gap-2 bg-slate-950/60 border border-white/5 py-1.5 px-3 rounded-lg text-[9px] font-mono">
-                <span className={`w-2 h-2 rounded-full ${isConnecting ? 'bg-cyan-400 animate-ping' : 'bg-emerald-400'}`}></span>
-                <span className="text-slate-300 font-light">
-                  {isConnecting ? "MENGHUBUNGKAN KONEKSI..." : "SIAP DIMAINKAN"}
-                </span>
-              </div>
-            </div>
-
+          {/* System info */}
+          <div className="text-[8px] font-mono tracking-widest text-white/30 uppercase text-right">
+            <div>Cozy World // Alpha 0.4</div>
+            <div className="mt-0.5">Nestia Dev &copy; 2026</div>
           </div>
-
-          {/* Launcher Loading Modal Overlay */}
-          <AnimatePresence>
-            {isConnecting && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-[#07080c]/90 backdrop-blur-md z-30 flex flex-col items-center justify-center p-8 text-center"
-              >
-                <div className="relative mb-6">
-                  {/* Outer glowing progress spinner */}
-                  <div className="w-16 h-16 rounded-full border-t-2 border-r-2 border-cyan-400 animate-spin"></div>
-                  {/* Inner logo/pulsing core */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-8 h-8 rounded-full bg-cyan-500/20 animate-pulse flex items-center justify-center">
-                      <div className="w-3.5 h-3.5 rounded-full bg-cyan-400"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <motion.h4
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-lg font-light tracking-[0.25em] uppercase text-cyan-200"
-                >
-                  Memulai Petualangan
-                </motion.h4>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.6 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-[10px] tracking-[0.15em] font-mono text-slate-400 uppercase mt-2.5"
-                >
-                  Menghubungkan ke Godot Bridge (Port 9001) // Membaca Save Data
-                </motion.p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
         </div>
 
       </div>
 
-      {/* Decorative Corner Borders */}
-      <div className="absolute top-6 left-6 w-5 h-5 border-t-2 border-l-2 border-white/10 z-30 pointer-events-none"></div>
-      <div className="absolute bottom-6 right-6 w-5 h-5 border-b-2 border-r-2 border-white/10 z-30 pointer-events-none"></div>
+      {/* ====== LAYER 3: LOADING OVERLAY ====== */}
+      <AnimatePresence>
+        {isConnecting && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 z-30 bg-black/85 backdrop-blur-md flex flex-col items-center justify-center text-center"
+          >
+            <div className="relative mb-6">
+              <div className="w-16 h-16 rounded-full border-t-2 border-r-2 border-cyan-400 animate-spin"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-cyan-500/20 animate-pulse flex items-center justify-center">
+                  <div className="w-3.5 h-3.5 rounded-full bg-cyan-400"></div>
+                </div>
+              </div>
+            </div>
+
+            <motion.h4
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg font-light tracking-[0.25em] uppercase text-cyan-200"
+            >
+              Memulai Petualangan
+            </motion.h4>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.6 }}
+              transition={{ delay: 0.4 }}
+              className="text-[10px] tracking-[0.15em] font-mono text-slate-400 uppercase mt-2.5"
+            >
+              Menghubungkan ke Godot Bridge (Port 9001)
+            </motion.p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </main>
   );
 }
+

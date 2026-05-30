@@ -125,11 +125,16 @@ export function MenuPanel({
           >
             <motion.div
               key={`popup-${activeScreen}`}
-              className="hanging-board w-[88vw] max-w-5xl"
-              initial={{ y: -220, opacity: 0, rotate: -1.2 }}
+              className="hanging-board w-[92vw] max-w-6xl"
+              initial={{ y: -260, opacity: 0, rotate: -10 }}
               animate={{ y: 0, opacity: 1, rotate: 0 }}
-              exit={{ y: -200, opacity: 0, rotate: 0.8 }}
-              transition={{ type: "spring", stiffness: 120, damping: 14, mass: 0.9 }}
+              exit={{ y: -200, opacity: 0, rotate: 6 }}
+              transition={{
+                y: { type: "spring", stiffness: 110, damping: 12, mass: 0.9 },
+                rotate: { type: "spring", stiffness: 70, damping: 6, mass: 1.3 },
+                opacity: { duration: 0.2 },
+              }}
+              style={{ originX: 0.5, originY: 0 }}
             >
               <motion.div
                 className="hanging-board__rope hanging-board__rope--left"

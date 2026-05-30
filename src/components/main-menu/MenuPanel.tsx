@@ -76,59 +76,49 @@ export function MenuPanel({
               onClick={onStartGame}
               onMouseEnter={() => onHoverOption("mulai")}
               onMouseLeave={() => onHoverOption(null)}
-              className="group relative flex items-center gap-4 py-3 px-5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-cyan-400/40 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer"
+              className="pixel-button pixel-button--primary flex items-center gap-3 px-4 py-3 text-[11px] font-semibold tracking-[0.2em] uppercase cursor-pointer"
             >
-              <Sparkles className="w-5 h-5 text-cyan-400/70 group-hover:text-cyan-300 transition-colors" />
-              <span className="text-sm font-light tracking-[0.2em] uppercase text-slate-200 group-hover:text-white transition-colors">
-                Mulai Petualangan
-              </span>
+              <Sparkles className="w-5 h-5 text-emerald-800" />
+              <span>Mulai Petualangan</span>
             </button>
 
             <button
               onClick={() => onNavigate("saves")}
               onMouseEnter={() => onHoverOption("lanjut")}
               onMouseLeave={() => onHoverOption(null)}
-              className="group relative flex items-center gap-4 py-3 px-5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-amber-400/30 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer"
+              className="pixel-button pixel-button--secondary flex items-center gap-3 px-4 py-3 text-[11px] font-semibold tracking-[0.2em] uppercase cursor-pointer"
             >
-              <History className="w-5 h-5 text-amber-500/60 group-hover:text-amber-400 transition-colors" />
-              <span className="text-sm font-light tracking-[0.2em] uppercase text-slate-300 group-hover:text-amber-100 transition-colors">
-                Lanjutkan Game
-              </span>
+              <History className="w-5 h-5 text-amber-800" />
+              <span>Lanjutkan Game</span>
             </button>
 
             <button
               onClick={() => onNavigate("gallery")}
               onMouseEnter={() => onHoverOption("galeri")}
               onMouseLeave={() => onHoverOption(null)}
-              className="group relative flex items-center gap-4 py-3 px-5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-slate-300/20 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer"
+              className="pixel-button flex items-center gap-3 px-4 py-3 text-[11px] font-semibold tracking-[0.2em] uppercase cursor-pointer"
             >
-              <ImageIcon className="w-5 h-5 text-slate-400/70 group-hover:text-slate-300 transition-colors" />
-              <span className="text-sm font-light tracking-[0.2em] uppercase text-slate-300 group-hover:text-white transition-colors">
-                Galeri Dunia
-              </span>
+              <ImageIcon className="w-5 h-5 text-slate-700" />
+              <span>Galeri Dunia</span>
             </button>
 
             <button
               onClick={() => onNavigate("settings")}
               onMouseEnter={() => onHoverOption("pengaturan")}
               onMouseLeave={() => onHoverOption(null)}
-              className="group relative flex items-center gap-4 py-3 px-5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-cyan-400/25 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer"
+              className="pixel-button flex items-center gap-3 px-4 py-3 text-[11px] font-semibold tracking-[0.2em] uppercase cursor-pointer"
             >
-              <SettingsIcon className="w-5 h-5 text-slate-400/70 group-hover:text-cyan-400/80 transition-colors" />
-              <span className="text-sm font-light tracking-[0.2em] uppercase text-slate-300 group-hover:text-slate-100 transition-colors">
-                Pengaturan
-              </span>
+              <SettingsIcon className="w-5 h-5 text-slate-700" />
+              <span>Pengaturan</span>
             </button>
 
             <button
               onMouseEnter={() => onHoverOption("keluar")}
               onMouseLeave={() => onHoverOption(null)}
-              className="group relative flex items-center gap-4 py-3 px-5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-red-500/30 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer"
+              className="pixel-button pixel-button--danger flex items-center gap-3 px-4 py-3 text-[11px] font-semibold tracking-[0.2em] uppercase cursor-pointer"
             >
-              <LogOut className="w-5 h-5 text-red-500/50 group-hover:text-red-400 transition-colors" />
-              <span className="text-sm font-light tracking-[0.2em] uppercase text-slate-300 group-hover:text-red-300 transition-colors">
-                Keluar Game
-              </span>
+              <LogOut className="w-5 h-5 text-red-800" />
+              <span>Keluar Game</span>
             </button>
           </motion.div>
         )}
@@ -144,12 +134,12 @@ export function MenuPanel({
           >
             <button
               onClick={() => onNavigate("home")}
-              className="flex items-center gap-2 text-xs tracking-wider text-amber-400/80 hover:text-amber-300 transition-colors mb-1 self-start cursor-pointer"
+              className="flex items-center gap-2 text-[10px] pixel-link mb-1 self-start cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" /> KEMBALI
             </button>
 
-            <h3 className="text-sm font-semibold tracking-widest text-slate-200 uppercase mb-1">
+            <h3 className="text-[11px] font-semibold tracking-[0.3em] uppercase text-[#5d442f] mb-1">
               PILIH SLOT PETUALANGAN
             </h3>
 
@@ -157,22 +147,22 @@ export function MenuPanel({
               <button
                 key={slot.id}
                 onClick={onStartGame}
-                className="w-full text-left p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:bg-amber-500/[0.06] hover:border-amber-400/30 transition-all duration-300 flex justify-between items-center group cursor-pointer"
+                className="pixel-panel pixel-panel--soft w-full text-left p-3 flex justify-between items-center gap-3 transition-transform hover:-translate-y-0.5 cursor-pointer"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-medium tracking-wide text-slate-200 group-hover:text-amber-300 transition-colors">
+                    <span className="text-xs font-semibold tracking-wide text-[#4b3324]">
                       {slot.name}
                     </span>
-                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400 font-mono">
+                    <span className="pixel-badge text-[8px] px-1.5 py-0.5">
                       {slot.day}
                     </span>
                   </div>
-                  <p className="text-[10px] text-slate-400 mt-1">
+                  <p className="text-[10px] pixel-muted mt-1">
                     {slot.detail}
                   </p>
                 </div>
-                <span className="text-[10px] font-mono text-slate-400 group-hover:text-amber-400 transition-colors">
+                <span className="text-[10px] font-mono pixel-muted">
                   {slot.playtime}
                 </span>
               </button>
@@ -191,35 +181,35 @@ export function MenuPanel({
           >
             <button
               onClick={() => onNavigate("home")}
-              className="flex items-center gap-2 text-xs tracking-wider text-cyan-400/80 hover:text-cyan-300 transition-colors mb-1 self-start cursor-pointer"
+              className="flex items-center gap-2 text-[10px] pixel-link mb-1 self-start cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" /> KEMBALI
             </button>
 
-            <h3 className="text-sm font-semibold tracking-widest text-slate-200 uppercase mb-1">
+            <h3 className="text-[11px] font-semibold tracking-[0.3em] uppercase text-[#5d442f] mb-1">
               DOKUMENTASI DUNIA
             </h3>
 
             {galleryItems.map((item, idx) => (
               <div
                 key={idx}
-                className="p-3 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-white/15 transition-all flex gap-3 group"
+                className="pixel-panel pixel-panel--soft p-3 flex gap-3"
               >
-                <div className="w-14 h-14 rounded-lg bg-black/30 border border-white/10 overflow-hidden flex-shrink-0">
+                <div className="pixel-frame w-14 h-14 rounded-md overflow-hidden flex-shrink-0">
                   <img
                     src={item.img}
                     alt={item.title}
-                    className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
-                  <h4 className="text-xs font-semibold text-slate-200">
+                  <h4 className="text-xs font-semibold text-[#4b3324]">
                     {item.title}
                   </h4>
-                  <p className="text-[9px] text-cyan-400/70 font-mono tracking-wider mt-0.5">
+                  <p className="text-[9px] font-mono tracking-wider mt-0.5 text-[#6a4c34]">
                     {item.region}
                   </p>
-                  <p className="text-[10px] text-slate-400 mt-1 leading-normal line-clamp-1">
+                  <p className="text-[10px] pixel-muted mt-1 leading-normal line-clamp-1">
                     {item.desc}
                   </p>
                 </div>
@@ -239,128 +229,134 @@ export function MenuPanel({
           >
             <button
               onClick={() => onNavigate("home")}
-              className="flex items-center gap-2 text-xs tracking-wider text-cyan-400/80 hover:text-cyan-300 transition-colors mb-1 self-start cursor-pointer"
+              className="flex items-center gap-2 text-[10px] pixel-link mb-1 self-start cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" /> KEMBALI
             </button>
 
-            <div className="bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] rounded-xl p-4">
-              <div className="flex items-center gap-1.5 text-slate-300 mb-3">
-                <Music className="w-4 h-4 text-amber-500/70" />
-                <span className="text-[10px] font-bold tracking-widest uppercase">
-                  PENGATURAN SUARA
-                </span>
-              </div>
+            <div className="settings-board">
+              <div className="settings-board__rope settings-board__rope--left"></div>
+              <div className="settings-board__rope settings-board__rope--right"></div>
+              <div className="settings-board__frame">
+                <div className="settings-board__paper">
+                  <div className="flex flex-col gap-4">
+                    <div className="pixel-panel p-4">
+                      <div className="flex items-center gap-1.5 mb-3 text-[#5d442f]">
+                        <Music className="w-4 h-4 text-amber-700" />
+                        <span className="text-[10px] font-bold tracking-[0.3em] uppercase">
+                          PENGATURAN SUARA
+                        </span>
+                      </div>
 
-              <div className="flex flex-col gap-3 pl-1">
-                <div className="flex flex-col gap-1">
-                  <div className="flex justify-between text-[10px] font-mono text-slate-400">
-                    <span>VOLUME UTAMA</span>
-                    <span>{masterVol}%</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={masterVol}
-                    onChange={(e) => onMasterVolChange(Number(e.target.value))}
-                  />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className="flex justify-between text-[10px] font-mono text-slate-400">
-                    <span>MUSIK LATAR (LOFI)</span>
-                    <span>{bgmVol}%</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={bgmVol}
-                    onChange={(e) => onBgmVolChange(Number(e.target.value))}
-                  />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className="flex justify-between text-[10px] font-mono text-slate-400">
-                    <span>EFEK SUARA</span>
-                    <span>{sfxVol}%</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={sfxVol}
-                    onChange={(e) => onSfxVolChange(Number(e.target.value))}
-                  />
-                </div>
-              </div>
-            </div>
+                      <div className="flex flex-col gap-3 pl-1">
+                        <div className="flex flex-col gap-1">
+                          <div className="flex justify-between text-[10px] font-mono pixel-muted">
+                            <span>VOLUME UTAMA</span>
+                            <span>{masterVol}%</span>
+                          </div>
+                          <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value={masterVol}
+                            onChange={(e) => onMasterVolChange(Number(e.target.value))}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <div className="flex justify-between text-[10px] font-mono pixel-muted">
+                            <span>MUSIK LATAR (LOFI)</span>
+                            <span>{bgmVol}%</span>
+                          </div>
+                          <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value={bgmVol}
+                            onChange={(e) => onBgmVolChange(Number(e.target.value))}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <div className="flex justify-between text-[10px] font-mono pixel-muted">
+                            <span>EFEK SUARA</span>
+                            <span>{sfxVol}%</span>
+                          </div>
+                          <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value={sfxVol}
+                            onChange={(e) => onSfxVolChange(Number(e.target.value))}
+                          />
+                        </div>
+                      </div>
+                    </div>
 
-            <div className="bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] rounded-xl p-4">
-              <div className="flex items-center gap-1.5 text-slate-300 mb-3">
-                <Tv className="w-4 h-4 text-cyan-400/70" />
-                <span className="text-[10px] font-bold tracking-widest uppercase">
-                  GRAFIS & TAMPILAN
-                </span>
-              </div>
+                    <div className="pixel-panel p-4">
+                      <div className="flex items-center gap-1.5 mb-3 text-[#5d442f]">
+                        <Tv className="w-4 h-4 text-emerald-700" />
+                        <span className="text-[10px] font-bold tracking-[0.3em] uppercase">
+                          GRAFIS & TAMPILAN
+                        </span>
+                      </div>
 
-              <div className="flex flex-col gap-2.5 pl-1">
-                <div className="flex justify-between items-center">
-                  <span className="text-[11px] text-slate-300 font-light">
-                    LAYAR PENUH
-                  </span>
-                  <button
-                    onClick={onToggleFullscreen}
-                    className={`w-9 h-5 rounded-full p-0.5 transition-colors duration-300 flex items-center ${isFullscreen ? "bg-cyan-500" : "bg-slate-800"}`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform duration-300 ${isFullscreen ? "translate-x-4" : "translate-x-0"}`}
-                    />
-                  </button>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-[11px] text-slate-300 font-light">
-                    V-SYNC
-                  </span>
-                  <button
-                    onClick={onToggleVsync}
-                    className={`w-9 h-5 rounded-full p-0.5 transition-colors duration-300 flex items-center ${vsync ? "bg-cyan-500" : "bg-slate-800"}`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform duration-300 ${vsync ? "translate-x-4" : "translate-x-0"}`}
-                    />
-                  </button>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-[11px] text-slate-300 font-light">
-                    KUALITAS GRAFIS
-                  </span>
-                  <div className="flex gap-1.5 bg-black/30 border border-white/5 p-0.5 rounded-lg">
-                    {(["Sedang", "Tinggi"] as QualityOption[]).map((q) => (
-                      <button
-                        key={q}
-                        onClick={() => onQualityChange(q)}
-                        className={`text-[9px] px-2 py-1 rounded-md transition-colors ${quality === q ? "bg-cyan-500 text-white font-semibold" : "text-slate-500 hover:text-slate-300"}`}
-                      >
-                        {q}
-                      </button>
-                    ))}
+                      <div className="flex flex-col gap-2.5 pl-1">
+                        <div className="flex justify-between items-center">
+                          <span className="text-[11px] text-[#4b3324] font-semibold">
+                            LAYAR PENUH
+                          </span>
+                          <button
+                            onClick={onToggleFullscreen}
+                            className={`pixel-toggle ${isFullscreen ? "is-on" : ""}`}
+                          >
+                            <div className="pixel-toggle__thumb" />
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-[11px] text-[#4b3324] font-semibold">
+                            V-SYNC
+                          </span>
+                          <button
+                            onClick={onToggleVsync}
+                            className={`pixel-toggle ${vsync ? "is-on" : ""}`}
+                          >
+                            <div className="pixel-toggle__thumb" />
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-[11px] text-[#4b3324] font-semibold">
+                            KUALITAS GRAFIS
+                          </span>
+                          <div className="flex gap-1.5 p-0.5 rounded-lg">
+                            {(["Sedang", "Tinggi"] as QualityOption[]).map((q) => (
+                              <button
+                                key={q}
+                                onClick={() => onQualityChange(q)}
+                                className={`pixel-pill text-[9px] px-2 py-1 transition-colors ${quality === q ? "is-active" : ""}`}
+                              >
+                                {q}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pixel-panel p-4">
+                      <div className="flex items-center gap-1.5 mb-2 text-[#5d442f]">
+                        <Gamepad2 className="w-4 h-4 text-emerald-700" />
+                        <span className="text-[10px] font-bold tracking-[0.3em] uppercase">
+                          KONTROL PERMAINAN
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-1.5 text-[9px] font-mono pixel-muted bg-[#f6ebd2] p-2.5 rounded-lg border-2 border-[#b88b5a]">
+                        <div>W, A, S, D : Gerak Karakter</div>
+                        <div>E / Klik : Interaksi</div>
+                        <div>Tab / I : Inventaris</div>
+                        <div>Esc : Menu Jeda</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div className="bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] rounded-xl p-4">
-              <div className="flex items-center gap-1.5 text-slate-300 mb-2">
-                <Gamepad2 className="w-4 h-4 text-cyan-400/50" />
-                <span className="text-[10px] font-bold tracking-widest uppercase">
-                  KONTROL PERMAINAN
-                </span>
-              </div>
-              <div className="grid grid-cols-2 gap-1.5 text-[9px] font-mono text-slate-400 bg-black/20 p-2.5 rounded-lg border border-white/5">
-                <div>W, A, S, D : Gerak Karakter</div>
-                <div>E / Klik : Interaksi</div>
-                <div>Tab / I : Inventaris</div>
-                <div>Esc : Menu Jeda</div>
               </div>
             </div>
           </motion.div>
